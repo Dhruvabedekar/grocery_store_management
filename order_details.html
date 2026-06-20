@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Order Details</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>🧾 Order Details</h1>
+
+<div class="top-navigation">
+
+<a href="/">
+<button>🏠 Home</button>
+</a>
+
+<a href="/orders">
+<button>📋 Orders</button>
+</a>
+
+</div>
+
+</div>
+
+<table>
+
+<tr>
+
+<th>Product</th>
+<th>Quantity</th>
+<th>Price</th>
+<th>Total</th>
+
+</tr>
+
+{% for item in items %}
+
+<tr>
+
+<td>{{ item.product_name }}</td>
+
+<td>{{ item.quantity }}</td>
+
+<td>₹{{ item.price }}</td>
+
+<td>₹{{ item.total }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

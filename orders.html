@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Orders</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>📋 Customer Orders</h1>
+
+<p>View All Customer Orders</p>
+
+<div class="top-navigation">
+
+<a href="/">
+<button>🏠 Home</button>
+</a>
+
+<a href="/cart">
+<button>🛒 Cart</button>
+</a>
+
+</div>
+
+</div>
+
+<table>
+
+<tr>
+
+<th>Order ID</th>
+<th>Customer Name</th>
+<th>Total Amount</th>
+<th>Actions</th>
+
+</tr>
+
+{% for order in orders %}
+
+<tr>
+
+<td>{{ order.id }}</td>
+
+<td>{{ order.customer_name }}</td>
+
+<td>₹{{ order.total_amount }}</td>
+
+<td>
+
+<a href="/order_details/{{ order.id }}">
+<button>
+View
+</button>
+</a>
+
+<a href="/delete_order/{{ order.id }}">
+
+<button class="delete-btn">
+Delete
+</button>
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

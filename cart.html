@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Cart</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>🛒 Place Your Order</h1>
+
+<p>Select Products From Categories</p>
+
+<div class="top-navigation">
+
+<a href="/">
+<button>🏠 Home</button>
+</a>
+
+<a href="/orders">
+<button>📋 Orders</button>
+</a>
+
+</div>
+
+</div>
+
+<!-- CATEGORY FILTER -->
+
+<div class="category-filter">
+
+<a href="/cart">
+<button>All</button>
+</a>
+
+<a href="/cart?category=Fruits">
+<button>🍎 Fruits</button>
+</a>
+
+<a href="/cart?category=Vegetables">
+<button>🥦 Vegetables</button>
+</a>
+
+<a href="/cart?category=Grains">
+<button>🌾 Grains</button>
+</a>
+
+</div>
+
+<!-- ORDER FORM -->
+
+<div class="cart-container">
+
+<form action="/place_order" method="POST">
+
+<input type="text"
+name="customer_name"
+placeholder="Enter Customer Name"
+required>
+
+<div class="cart-products">
+
+{% for product in products %}
+
+<div class="cart-card">
+
+<div class="cart-icon">
+
+{% if product.category == "Fruits" %}
+🍎
+{% elif product.category == "Vegetables" %}
+🥦
+{% else %}
+🌾
+{% endif %}
+
+</div>
+
+<h2>{{ product.name }}</h2>
+
+<p class="category">
+{{ product.category }}
+</p>
+
+<p class="price">
+₹{{ product.price }}
+</p>
+
+<p class="stock">
+Available: {{ product.quantity }}
+</p>
+
+<label>
+
+Quantity
+
+<input type="number"
+name="qty{{ product.id }}"
+min="1"
+value="1">
+
+</label>
+
+<label class="checkbox">
+
+<input type="checkbox"
+name="products"
+value="{{ product.id }}-1">
+
+Add To Order
+
+</label>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<button type="submit"
+class="place-order-btn">
+
+✅ Place Order
+
+</button>
+
+</form>
+
+</div>
+
+</body>
+</html>
